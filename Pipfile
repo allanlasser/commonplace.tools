@@ -1,0 +1,23 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+django = "==4.2.1"
+django-rest-framework = "*"
+django-filter = "*"
+django-filebrowser = "*"
+pillow = "*"
+django-grappelli = "*"
+django-rename-app = "*"
+djangorestframework-gis = "*"
+pyscopg2 = "*"
+psycopg2-binary = "*"
+faker = "*"
+pylint = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.11"
