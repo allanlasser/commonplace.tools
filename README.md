@@ -1,4 +1,4 @@
-# backend.tools
+# commonplace.tools
 Decentralized Tool Share
 
 ## Frontend
@@ -17,3 +17,7 @@ npm run dev -- --host
 ```
 
 If you're using Codespaces, using `--host` exposes the port to the network.
+
+## Backend
+
+The backend uses Django with DRF. It's also fun and nice.
