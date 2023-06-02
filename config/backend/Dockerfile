@@ -6,6 +6,6 @@ WORKDIR /code
 #COPY requirements.txt /code/
 #RUN pip install -r requirements.txt
 RUN pip install pipenv
-COPY Pipfile Pipfile.lock /code/
+COPY ../../Pipfile ../../Pipfile.lock /code/
 RUN pipenv install --system --deploy && apt-get update && apt-get upgrade -y && apt-get install -y binutils libproj-dev gdal-bin postgis
-COPY . /code/
+COPY .../.. /code/
