@@ -25,10 +25,13 @@ services:
   #   depends_on:
   #     - db
 
-  nodeserver:
+  sveltekit:
     build:
-      context: .
-      dockerfile: ./config/frontend/Dockerfile
+      context: ./frontend
+      dockerfile: ./Dockerfile
+    command: npm run start
+    ports:
+      - "3000:3000"
     environment:
       VIRTUAL_HOST: ${VIRTUAL_HOST}
       VIRTUAL_PORT: ${VIRTUAL_PORT}
