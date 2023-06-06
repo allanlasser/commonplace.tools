@@ -32,12 +32,44 @@ services:
     command: npm run start
     ports:
       - "3000:3000"
+  db:
+    image: postgis/postgis
+    volumes:
+      - db:/var/lib/postgresql/data
     environment:
-      VIRTUAL_HOST: ${VIRTUAL_HOST}
-      VIRTUAL_PORT: ${VIRTUAL_PORT}
-      LETSENCRYPT_HOST: ${VIRTUAL_HOST}
-      LETSENCRYPT_EMAIL: ${LETSENCRYPT_EMAIL}
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
     restart: unless-stopped
+
+  django:
+    build: 
+      context: .
+      dockerfile: ./config/backend/Dockerfile
+    command: ./config/backend/start.sh
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    environment:
+      - POSTGRES_NAME=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    depends_on:
+      - db
+    restart: unless-stopped
+
+  # nodeserver:
+  #   build:
+  #     context: .
+  #     dockerfile: ./config/frontend/Dockerfile
+  #   command: node index.js
+  #   environment:
+  #     VIRTUAL_HOST: ${VIRTUAL_HOST}
+  #     VIRTUAL_PORT: ${VIRTUAL_PORT}
+  #     LETSENCRYPT_HOST: ${VIRTUAL_HOST}
+  #     LETSENCRYPT_EMAIL: ${LETSENCRYPT_EMAIL}
+  #   restart: unless-stopped
 
   # nginx-proxy:
   #   container_name: nginx-proxy
@@ -68,5 +100,6 @@ services:
   #   depends_on:
   #     - nginx-proxy
   
-# volumes:
-#    certs:
+volumes:
+   certs:
+   db:
