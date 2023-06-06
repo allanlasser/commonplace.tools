@@ -19,9 +19,28 @@ from django.urls import path
 from django.conf.urls import include
 from filebrowser.sites import site
 from rest_framework import routers
+from lending_library.views import LoanViewSet 
+from lending_library.views import LocationViewSet
+from lending_library.views import NetworkViewSet
+from lending_library.views import LendableTypeViewSet
+from lending_library.views import LendableStatusViewSet
+from lending_library.views import LendableViewSet
+from lending_library.views import LoanViewSet
+from lending_library.views import UserViewSet
+from lending_library.views import GroupViewSet, PermissionViewSet
+
+
 
 router = routers.DefaultRouter()
-
+router.register(r'users', UserViewSet)
+router.register(r'lendablestatus', LendableStatusViewSet)
+router.register(r'loans', LoanViewSet)
+router.register(r'locations', LocationViewSet)
+router.register(r'networks', NetworkViewSet)
+router.register(r'lendabletypes', LendableTypeViewSet)
+router.register(r'lendables', LendableViewSet)
+router.register(r'groups', GroupViewSet)
+router.register(r'permissions', PermissionViewSet)
 
 urlpatterns = [
     path('admin/filebrowser/', site.urls),

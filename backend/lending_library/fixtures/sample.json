@@ -10,7 +10,7 @@
         "state": "IN",
         "postal_code": "46204",
         "country": "US",
-        "point_geometry": "SRID=4326;POINT (39.76854655194396, -86.1580629779263)",
+        "point_geometry": "SRID=4326;POINT (39.76854655194396 -86.1580629779263)",
         "created": "2023-05-31T11:22:48.581Z",
         "modified": "2023-05-31T11:22:48.582Z"
       }
