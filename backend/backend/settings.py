@@ -148,3 +148,8 @@ REST_FRAMEWORK = {
 }
 
 AUTH_PROFILE_MODULE = "lending_library.UserProfile"
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://commonplace.tools',
+    'https://app.commonplace.tools',
+]
