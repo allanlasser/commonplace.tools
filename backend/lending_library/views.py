@@ -9,7 +9,7 @@ from lending_library.permissions import IsOwnerOrReadOnly
 from rest_framework.viewsets import ModelViewSet
 
 class LocationViewSet(ModelViewSet):
-    permission_classes = [IsOwnerOrReadOnly,]
+    permission_classes = [IsAuthenticatedOrReadOnly,]
     queryset = Location.objects.all().order_by('id')
     serializer_class = LocationSerializer
 
@@ -30,12 +30,12 @@ class LendableStatusViewSet(ModelViewSet):
 
 class LendableViewSet(ModelViewSet):
     permission_classes = [IsAuthenticatedOrReadOnly,]
-    permission_classes = [IsOwnerOrReadOnly]
+#    permission_classes = [IsOwnerOrReadOnly]
     queryset = Lendable.objects.all().order_by('id')
     serializer_class = LendableSerializer
 
 class LoanViewSet(ModelViewSet):
-    permission_classes = [IsOwnerOrReadOnly]
+    permission_classes = [IsAuthenticatedOrReadOnly,]
     queryset = Loan.objects.all().order_by('id')
     serializer_class = LoanSerializer
 
