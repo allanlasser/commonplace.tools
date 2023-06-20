@@ -3,7 +3,7 @@
   export let data;
 </script>
 
-<Title>Tools</Title>
+<Title><h1>Tools</h1></Title>
 <ul>
   {#each data.tools.results as {id, name}}
     <li><a href="/tools/{id}">{name}</a></li>

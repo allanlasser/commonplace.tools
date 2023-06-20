@@ -35,7 +35,7 @@
   }
 </style>
 
-<Title>{data.tool.name}</Title>
+<Title><h1>{data.tool.name}</h1></Title>
 <dl class="grid grid-8em center">
   {#if data.location}
   <div class="grid-item">

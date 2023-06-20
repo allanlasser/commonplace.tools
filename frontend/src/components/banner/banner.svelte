@@ -1,3 +1,8 @@
+<script>
+
+	import Title from "@/components/type/title.svelte";
+
+</script>
 <style>
   .banner {
     margin: 0;
@@ -7,12 +12,6 @@
   }
   .display {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  }
-  .title {
-    font-size: 2rem;
-    text-align: center;
-    font-weight: 800;
-    margin: 1em;
   }
   .individual {
     margin: 2em;
@@ -30,7 +29,7 @@
 </style>
 
 <div class="banner display">
-  <h2 class="title">Distributed toolshare</h2>
+  <Title><h2>Distributed toolshare</h2></Title>
   <p class="individual">Stop buying things and leaving them in your garage all year</p>
   <p class="community">Share them with your neighbors, instead!</p>
 </div>
