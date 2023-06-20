@@ -1,12 +1,5 @@
 services:
 
-  sveltekit:
-    build:
-      context: ./frontend
-      dockerfile: ./Dockerfile
-    command: npm run start
-    ports:
-      - "3000:3000"
   db:
     image: postgis/postgis
     volumes:
@@ -15,24 +8,6 @@ services:
       - POSTGRES_DB=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-    restart: unless-stopped
-
-  django:
-    build: 
-      context: .
-      dockerfile: ./config/backend/Dockerfile
-    command: ./config/backend/start.sh
-    volumes:
-      - .:/code
-      - static:/static
-    ports:
-      - "8000:8000"
-    environment:
-      - POSTGRES_NAME=postgres
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-    depends_on:
-      - db
     restart: unless-stopped
 
   nginx-proxy:
@@ -66,6 +41,87 @@ services:
     restart: unless-stopped
     depends_on:
       - nginx-proxy
+  
+  backend:
+    build: 
+      context: .
+      dockerfile: ./config/backend/Dockerfile
+    command: ./config/backend/start.sh
+    volumes:
+      - .:/code
+      - static:/static
+    ports:
+      - "8000:8000"
+    environment:
+      - POSTGRES_NAME=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    depends_on:
+      - nginx-proxy
+      - db
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: ./Dockerfile
+    command: npm run start
+    ports:
+      - "3000:3000"
+    depends_on:
+      - nginx-proxy
+  
+  ####
+  # LOCAL DEVELOPMENT SERVICES
+  ####
+  
+  nginx-proxy-local:
+    container_name: nginx-proxy-local
+    build:
+      context: .
+      dockerfile: ./config/nginx/Dockerfile-local
+    volumes:
+      - certs:/etc/nginx/certs:ro
+      - /etc/nginx/vhost.d
+      - /etc/acme.sh
+      - /usr/share/nginx/html
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - static:/static
+    ports:
+      - '80:80'
+      - '443:443'
+    restart: always
+
+  backend-local:
+    build: 
+      context: .
+      dockerfile: ./config/backend/Dockerfile-local
+    command: ./config/backend/start-local.sh
+    volumes:
+      - .:/code
+      - static:/static
+    ports:
+      - "8000:8000"
+    environment:
+      - POSTGRES_NAME=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    depends_on:
+      - db
+      - nginx-proxy-local
+    restart: unless-stopped
+
+  frontend-local:
+    build:
+      context: ./frontend
+      dockerfile: ./Dockerfile
+    command: npm run start
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend-local
+    environment:
+      - API_MODE=local
   
 volumes:
    certs:

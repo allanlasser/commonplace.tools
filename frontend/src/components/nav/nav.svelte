@@ -53,7 +53,7 @@
 <nav class="header sticky">
   <a class="link" href="/"><Title className="small"><span class="common">Common</span><span class="place">place</span><span class="tools">Tools</span></Title></a>
   <ul class="link-list">
-    <li><a class="link about" href="/about">About</a></li>
+    <li><a class="link tools" href="/tools">Tools</a></li>
     <li><a class="link login" href="/login">Login</a></li>
   </ul>
 </nav>

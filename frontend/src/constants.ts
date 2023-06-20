@@ -1,0 +1,1 @@
+export const API_URL = process.env.API_MODE === 'local' ? 'http://localhost:8000' : 'https://app.commonplace.tools'
