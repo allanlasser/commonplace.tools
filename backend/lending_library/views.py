@@ -1,12 +1,13 @@
-from django.shortcuts import render
-from lending_library.models import Location, Network, LendableStatus, LendableType
-from lending_library.models import Lendable, Loan, UserProfile 
 from django.contrib.auth.models import User, Group, Permission
-from lending_library.serializers import GroupSerializer, PermissionSerializer, UserSerializer, LoanSerializer, LocationSerializer, NetworkSerializer, LendableSerializer, LendableTypeSerializer, LendableStatusSerializer
-from rest_framework import generics
+from django.contrib.contenttypes.models import ContentType
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAdminUser, AllowAny
-from lending_library.permissions import IsOwnerOrReadOnly
 from rest_framework.viewsets import ModelViewSet
+from lending_library.models import Location, Network, LendableStatus, LendableType
+from lending_library.models import Lendable, Loan, UserProfile
+from lending_library.serializers import GroupSerializer, PermissionSerializer, UserSerializer
+from lending_library.serializers import LoanSerializer, LocationSerializer, NetworkSerializer, ContentTypeSerializer
+from lending_library.serializers import LendableSerializer, LendableTypeSerializer, LendableStatusSerializer
+from lending_library.permissions import IsOwnerOrReadOnly
 
 class LocationViewSet(ModelViewSet):
     permission_classes = [IsAuthenticatedOrReadOnly,]
@@ -53,3 +54,8 @@ class PermissionViewSet(ModelViewSet):
     permission_classes = [IsAuthenticatedOrReadOnly,]
     queryset = Permission.objects.all().order_by('id')
     serializer_class = PermissionSerializer
+    
+class ContentTypeViewSet(ModelViewSet):
+    permission_classes = [IsAuthenticatedOrReadOnly,]
+    queryset = ContentType.objects.all().order_by('id')
+    serializer_class = ContentTypeSerializer

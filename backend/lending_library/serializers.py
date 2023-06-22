@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User, Group, Permission
+from django.contrib.contenttypes.models import ContentType
 from lending_library.models import Location, Network, LendableStatus, LendableType, Lendable, Loan, UserProfile 
 from rest_framework import serializers
 
@@ -17,6 +18,12 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
 class PermissionSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Permission
+        fields = '__all__'
+     #   exclude = ('contenttype',)
+
+class ContentTypeSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = ContentType
         fields = '__all__'
 
 class LendableSerializer(serializers.HyperlinkedModelSerializer):

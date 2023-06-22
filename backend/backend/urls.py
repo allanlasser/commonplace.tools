@@ -27,7 +27,7 @@ from lending_library.views import LendableStatusViewSet
 from lending_library.views import LendableViewSet
 from lending_library.views import LoanViewSet
 from lending_library.views import UserViewSet
-from lending_library.views import GroupViewSet, PermissionViewSet
+from lending_library.views import GroupViewSet, PermissionViewSet, ContentTypeViewSet
 
 
 
@@ -41,6 +41,8 @@ router.register(r'lendabletypes', LendableTypeViewSet)
 router.register(r'lendables', LendableViewSet)
 router.register(r'groups', GroupViewSet)
 router.register(r'permissions', PermissionViewSet)
+router.register(r'contenttype', ContentTypeViewSet)
+
 
 urlpatterns = [
     path('admin/filebrowser/', site.urls),
