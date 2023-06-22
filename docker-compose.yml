@@ -102,6 +102,11 @@ services:
       - static:/static
     ports:
       - "8000:8000"
+    expose:
+      - "8000"
+    networks:
+      - default
+      - local
     environment:
       - POSTGRES_NAME=postgres
       - POSTGRES_USER=postgres
@@ -118,13 +123,19 @@ services:
     command: npm run start
     ports:
       - "3000:3000"
+    networks:
+      - local
     depends_on:
       - backend-local
       - nginx-proxy-local
     environment:
-      - API_MODE=local
-  
+      - API_URL=http://backend-local:8000
+
+networks:
+  local:
+    driver: bridge
+
 volumes:
-   certs:
-   db:
-   static:
+  certs:
+  db:
+  static:

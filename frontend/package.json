@@ -4,7 +4,7 @@
 	"private": true,
 	"scripts": {
 		"dev": "vite dev",
-    "dev:local": "API_MODE=local vite dev",
+    "dev:local": "API_URL=http://localhost:8000 vite dev",
 		"build": "vite build",
 		"preview": "vite preview",
 		"start": "node build",

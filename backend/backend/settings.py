@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -24,9 +25,9 @@ SECRET_KEY = 'django-insecure-eyiudt)c4efbabjqea@k^+od%p0a@rmw+v6%ys9+dn0tq%z_ga
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
-ALLOWED_HOSTS = ['api.commonplace.tools','api-dev.commonplace.tools']
-
+# SECURITY WARNING: don't allow localhost or local service hosts in production!
+ALLOWED_HOSTS = ['backend-local',
+                 'api.commonplace.tools', 'api-dev.commonplace.tools']
 
 # Application definition
 
@@ -80,7 +81,6 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-import os
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
