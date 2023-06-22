@@ -26,7 +26,7 @@ services:
       - '80:80'
       - '443:443'
     restart: always
-
+  
   letsencrypt:
     image: nginxproxy/acme-companion
     environment:
@@ -120,6 +120,7 @@ services:
       - "3000:3000"
     depends_on:
       - backend-local
+      - nginx-proxy-local
     environment:
       - API_MODE=local
   
