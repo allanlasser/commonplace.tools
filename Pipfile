@@ -17,6 +17,7 @@ psycopg2-binary = "*"
 faker = "*"
 pylint = "*"
 gunicorn = "*"
+requests = "*"
 
 [dev-packages]
 

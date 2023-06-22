@@ -1,13 +1,15 @@
 from django.contrib.gis.db import models
+from django.contrib.gis.geos import Point
 from django.contrib.auth.models import User
 from django.conf import settings
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
+import requests
 
-"""
-Location contains a street address and a point
-"""
 class Location(models.Model):
+    """
+    Location contains a street address and a point and can be used for people, things, networks, etc
+    """
     name = models.CharField("Address name", max_length=1024,blank=True)
     address1 = models.CharField("Address line 1", max_length=1024, blank=True)
     address2 = models.CharField("Address line 2", max_length=1024, blank=True)
@@ -15,19 +17,54 @@ class Location(models.Model):
     state = models.CharField("State", max_length=2, blank=True)
     postal_code = models.CharField("Zip or Postal Code", max_length=12)
     country = models.CharField("Country", max_length=2, blank=True)
-    point_geometry = models.PointField("Location Point", srid=4326, blank=True)
+    point_geometry = models.PointField("Location Point", srid=4326, blank=True, null=True)
 
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
 
+
+    def save(self, *args, **kwargs):
+        """
+        Geocode US based address using the US Census Geocoder tool. 
+        Only works with US addresses, we would need to use a different service, 
+        perhaps Smarty or Google paid APIs, to geocode non-US addresses.
+        """
+        recode = False
+        
+        # Check to see if we are new, or modifying any of the specific fields that matter, and trigger re-geocoding.
+        if self.pk is not None:
+            orig = Location.objects.get(pk=self.pk)
+            fields_to_check = ('address1', 'city', 'state', 'postal_code', 'country')
+            for field in fields_to_check:
+                if getattr(orig, field) != getattr(self, field):
+                    recode = True
+                    break
+        if self.country == 'US' and (recode == True or self.point_geometry is None):
+            try:
+                URLbase = 'https://geocoding.geo.census.gov/geocoder/locations/address?format=json&benchmark=Public_AR_Current&'
+                URLparam = f'street={self.address1}&city={self.city}&state={self.state}&zip={self.postal_code}'
+                r = requests.get(URLbase+URLparam)
+                r.raise_for_status()
+                r_dict = r.json()
+                print(r_dict)
+                lon = r_dict['result']['addressMatches'][0]['coordinates']['x']
+                lat = r_dict['result']['addressMatches'][0]['coordinates']['y']
+                self.point_geometry = Point(lon, lat, srid='4326')
+            except Exception as e:
+                print('Geocoding request error: {}'.format(e,))
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.name
 
 
 class Network(models.Model):
+    """
+    A lending network brings people together. Typically visablility is limited to within one network.
+    """
     name = models.CharField(max_length=255)
     location = models.ForeignKey(Location, on_delete=models.CASCADE)
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
@@ -37,8 +74,11 @@ class Network(models.Model):
         return f"{self.name} - {self.location}"
 
 
-# Different possible statues - Available, Broken, Missing, On-Loan
 class LendableStatus(models.Model):
+    """
+    Different possible statues - Available, Broken, Missing, On-Loan
+    These are defined on a per-network basis to allow localization and customization.
+    """
     name = models.CharField("Status of Lendable", max_length=1024)
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
@@ -52,8 +92,11 @@ class LendableStatus(models.Model):
     def __str__(self):
         return self.name
 
-# Different possible types of lendable objects - books, tools, clothes, etc
 class LendableType(models.Model):
+    """
+    Different possible types of lendable objects - books, tools, clothes, etc
+    These are defined on a per-network basis to allow localization and customization.
+    """
     name = models.CharField("Type of Lendable", max_length=1024)
 
     created = models.DateTimeField(auto_now_add=True)
