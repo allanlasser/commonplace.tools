@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-eyiudt)c4efbabjqea@k^+od%p0a@rmw+v6%ys9+dn0tq%z_ga
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost','app.commonplace.tools']
+ALLOWED_HOSTS = ['api.commonplace.tools']
 
 
 # Application definition
