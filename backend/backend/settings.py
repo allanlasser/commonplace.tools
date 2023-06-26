@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-eyiudt)c4efbabjqea@k^+od%p0a@rmw+v6%ys9+dn0tq%z_ga
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['api.commonplace.tools']
+ALLOWED_HOSTS = ['api.commonplace.tools','api-dev.commonplace.tools']
 
 
 # Application definition
@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_gis',
     'lending_library',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
@@ -78,13 +79,6 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.contrib.gis.db.backends.spatialite',
-#        'NAME': BASE_DIR / 'db.sqlite3',
-#    }
-#}
 
 import os
 DATABASES = {
