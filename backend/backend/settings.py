@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-eyiudt)c4efbabjqea@k^+od%p0a@rmw+v6%ys9+dn0tq%z_ga
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 # SECURITY WARNING: don't allow localhost or local service hosts in production!
-ALLOWED_HOSTS = ['backend-local',
+ALLOWED_HOSTS = ['localhost', 'backend-local',
                  'api.commonplace.tools', 'api-dev.commonplace.tools']
 
 # Application definition
