@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_gis',
     'lending_library',
-    'django_rename_app',
 ]
 
 MIDDLEWARE = [
