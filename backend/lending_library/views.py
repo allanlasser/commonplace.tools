@@ -19,7 +19,8 @@ class LocationViewSet(ModelViewSet):
     serializer_class = LocationSerializer
     filter_backends = (SearchFilter, DjangoFilterBackend)
     search_fields = ('name',)
-    filterset_fields = ['name', 'address1', 'address2', 'city', 'state', 'postal_code']
+    filterset_fields = ['name', 'address1',
+                        'address2', 'city', 'state', 'postal_code']
 
 
 class NetworkViewSet(ModelViewSet):
@@ -27,7 +28,7 @@ class NetworkViewSet(ModelViewSet):
     queryset = Network.objects.all().order_by('id')
     serializer_class = NetworkSerializer
     filter_backends = (SearchFilter, DjangoFilterBackend)
-    search_fields = ('name','location')
+    search_fields = ('name', 'location')
     filterset_fields = ['name', 'location', 'owner']
 
 
@@ -36,10 +37,12 @@ class LendableTypeViewSet(ModelViewSet):
     queryset = LendableType.objects.all().order_by('id')
     serializer_class = LendableTypeSerializer
 
+
 class LendableStatusViewSet(ModelViewSet):
     permission_classes = [IsAuthenticatedOrReadOnly,]
     queryset = LendableStatus.objects.all().order_by('id')
     serializer_class = LendableStatusSerializer
+
 
 class LendableViewSet(ModelViewSet):
     permission_classes = [IsAuthenticatedOrReadOnly,]
@@ -49,22 +52,25 @@ class LendableViewSet(ModelViewSet):
     filter_backends = (SearchFilter, DjangoFilterBackend)
     search_fields = ('name',)
     filterset_fields = ['lendable_status', 'lendable_type', 'replacement_cost',
-        'name', 'owner', 'location']
+                        'name', 'owner', 'location']
+
 
 class LoanViewSet(ModelViewSet):
     permission_classes = [IsAuthenticatedOrReadOnly,]
     queryset = Loan.objects.all().order_by('id')
     serializer_class = LoanSerializer
-    filter_backends = (SearchFilter, DjangoFilterBackend)
-    search_fields = ('lendable__owner','borrowing_user', 'lendable__name')
-    filterset_fields = ['lendable','lendable__name', 'lendable__owner',
-        'return_confirmed_by_borrower',
-        'return_confirmed_by_lender',
-        'lendable__owner',
-        'borrowing_user',
-        'confirmed_by_lender',
-        'confirmed_by_borrower',
-        ]
+    filter_backends = (SearchFilter, OrderingFilter, DjangoFilterBackend)
+    search_fields = ('lendable__owner', 'borrowing_user', 'lendable__name')
+    ordering_fields = ['id', 'start_date', 'end_date']
+    ordering = ['id']
+    filterset_fields = ['lendable', 'lendable__name', 'lendable__owner',
+                        'return_confirmed_by_borrower',
+                        'return_confirmed_by_lender',
+                        'lendable__owner',
+                        'borrowing_user',
+                        'confirmed_by_lender',
+                        'confirmed_by_borrower',
+                        ]
 
 
 class UserViewSet(ModelViewSet):
@@ -72,10 +78,12 @@ class UserViewSet(ModelViewSet):
     queryset = User.objects.all().order_by('id')
     serializer_class = UserSerializer
 
+
 class GroupViewSet(ModelViewSet):
     permission_classes = [IsAuthenticatedOrReadOnly,]
     queryset = Group.objects.all().order_by('id')
     serializer_class = GroupSerializer
+
 
 class PermissionViewSet(ModelViewSet):
     permission_classes = [IsAuthenticatedOrReadOnly,]
@@ -84,7 +92,8 @@ class PermissionViewSet(ModelViewSet):
     filter_backends = (SearchFilter, OrderingFilter, DjangoFilterBackend)
     search_fields = ('codename', 'name',)
     filterset_fields = ('codename', 'name')
-    
+
+
 class ContentTypeViewSet(ModelViewSet):
     permission_classes = [IsAuthenticatedOrReadOnly,]
     queryset = ContentType.objects.all().order_by('id')

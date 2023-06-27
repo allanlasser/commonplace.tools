@@ -1,11 +1,29 @@
 # commonplace.tools
 Decentralized Tool Share
 
-## Frontend
+## Development
 
-The frontend uses SvelteKit. It's fun and nice!
+We user Docker to package up our application into deterministic runtimes.
 
-### Development
+### Backend
+
+The backend uses Django with DRF. It's also fun and nice.
+
+To serve the backend with Docker:
+
+```
+docker compose up backend-local
+```
+
+### Frontend
+
+To serve the frontend with Docker:
+
+```
+docker compose up frontend-local
+```
+
+To run the frontend on your machine:
 
 ```sh
 cd frontend
@@ -18,6 +36,10 @@ npm run dev -- --host
 
 If you're using Codespaces, using `--host` exposes the port to the network.
 
-## Backend
+## Production
 
-The backend uses Django with DRF. It's also fun and nice.
+To run the production stack:
+
+```
+docker compose up backend frontend
+```
