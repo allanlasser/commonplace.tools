@@ -15,7 +15,7 @@
 	{#if data.owner}
 		<div class="grid-item">
 			<dt>Owner</dt>
-			<dd>{data.owner.username}</dd>
+			<dd><a href="/users/{data.owner.id}">{data.owner.username}</a></dd>
 		</div>
 	{/if}
 	{#if data.status}
@@ -37,7 +37,10 @@
 		</thead>
 		{#each data.history.results as loan}
 			<tr>
-				<td>{loan.borrowing_user_data?.username}</td>
+				<td
+					><a href="/users/{loan.borrowing_user_data?.id}">{loan.borrowing_user_data?.username}</a
+					></td
+				>
 				<td>{new Date(loan.start_date).toDateString()}</td>
 				<td>{new Date(loan.returned_datetime).toDateString()}</td>
 			</tr>

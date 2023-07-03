@@ -1,4 +1,4 @@
-import { getSingle } from './api';
+import { getList, getSingle } from './api';
 
 export interface UserResult {
 	id: number;
@@ -13,6 +13,10 @@ export interface UserResult {
 	date_joined: string;
 }
 
-export async function getUser(id: number): Promise<UserResult> {
+export async function getUser(id: number | string) {
 	return getSingle<UserResult>(`users/${id}`);
+}
+
+export async function getUserList() {
+	return getList<UserResult>(`users`);
 }

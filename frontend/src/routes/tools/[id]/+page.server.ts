@@ -9,7 +9,7 @@ interface UnwrappedLoanResult extends LoanResult {
 	borrowing_user_data?: UserResult;
 }
 
-export async function load({ params }) {
+export async function load({ params }: { params: { id: string } }) {
 	const tool = await getTool(params.id);
 	const owner = await getResource<UserResult>(tool.owner);
 	const location = tool.location ? await getResource<LocationResult>(tool.location) : null;
