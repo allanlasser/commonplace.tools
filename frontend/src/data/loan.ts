@@ -20,6 +20,8 @@ export interface LoanFilters {
 	lendable?: string | number;
 	lendable__owner?: string | number;
 	borrowing_user?: string | number;
+	return_confirmed_by_borrower?: boolean;
+	return_confirmed_by_lender?: boolean;
 }
 
 export async function getLoanList(filters?: LoanFilters, ordering?: string) {
