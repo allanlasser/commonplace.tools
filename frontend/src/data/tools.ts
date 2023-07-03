@@ -14,8 +14,12 @@ export interface LendablesResult {
 	location_updated: string | null;
 }
 
-export async function getToolList() {
-	return getList<LendablesResult>('lendables');
+export interface ToolFilters {
+	owner?: string;
+}
+
+export async function getToolList(filters?: ToolFilters, ordering?: string) {
+	return getList<LendablesResult>('lendables', { ...filters, ordering });
 }
 
 export async function getTool(id: string) {
