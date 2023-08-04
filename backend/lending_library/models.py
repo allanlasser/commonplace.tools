@@ -189,8 +189,8 @@ class Photo(models.Model):
         height_field='height',
         width_field='width'
     )
-    height = models.PositiveIntegerField()
-    width = models.PositiveIntegerField()
+    height = models.PositiveIntegerField(null=True, blank=True)
+    width = models.PositiveIntegerField(null=True, blank=True)
     caption = models.CharField(max_length=1024, blank=True)
 
     created = models.DateTimeField(auto_now_add=True)

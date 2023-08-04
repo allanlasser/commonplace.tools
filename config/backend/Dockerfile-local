@@ -9,5 +9,7 @@ RUN pip install pipenv
 COPY ./Pipfile ./Pipfile.lock /code/
 RUN pipenv install --system --deploy && apt-get update && apt-get upgrade -y && apt-get install -y binutils libproj-dev gdal-bin postgis
 COPY ./backend .
+# .env can be generated with initialize_dotenv.py
+COPY ./.env ./.env
 COPY ./config/backend/start-local.sh .
 RUN chmod +x /code/start-local.sh

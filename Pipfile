@@ -18,6 +18,9 @@ pylint = "*"
 gunicorn = "*"
 requests = "*"
 pipfile = "*"
+django-storages = "*"
+boto3 = "*"
+python-decouple = "*"
 
 [dev-packages]
 
