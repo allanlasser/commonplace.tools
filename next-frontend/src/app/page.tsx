@@ -2,30 +2,9 @@ import Image from "next/image";
 import styles from "./page.module.css";
 import cx from "classnames";
 
+import { type Tool, tools } from "src/data/tools";
 import Text from "src/components/Text";
 import Card from "src/components/Card";
-
-interface Tool {
-  id: string;
-  name: string;
-  owner: string;
-  image: string;
-}
-
-const tools = [
-  {
-    id: "1",
-    name: "Hammer",
-    owner: "Allan",
-    image: "/placeholder.png",
-  },
-  {
-    id: "2",
-    name: "Wheelbarrow",
-    owner: "Chris",
-    image: "/placeholder.png",
-  },
-];
 
 import color from "src/styles/color.module.css";
 import layout from "src/styles/layout.module.css";
