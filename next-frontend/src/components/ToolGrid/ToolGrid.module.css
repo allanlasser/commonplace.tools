@@ -1,0 +1,26 @@
+
+.image {
+  max-width: 100%;
+  height: auto;
+  background-color: #f3f2f2;
+}
+
+.link {
+  display: block;
+  transform: translateY(0px);
+  filter: drop-shadow(0px 1px 1px var(--c-black-1));
+  transition: filter .1s linear, transform .1s linear;
+}
+
+.link:hover, .link:focus {
+  transform: translateY(-2px);
+  filter: drop-shadow(0px 2px 3px var(--c-black-3));
+}
+
+.newTool {
+  background-color: var(--c-braun-green);
+}
+
+.requestTool {
+  background-color: var(--c-braun-yellow);
+}
