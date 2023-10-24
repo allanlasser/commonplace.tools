@@ -1,91 +1,155 @@
-import Image from 'next/image'
-import { Inter } from "next/font/google"
-import styles from './page.module.css'
+import Image from "next/image";
+import { Inter } from "next/font/google";
+import styles from "./page.module.css";
+import cx from "classnames";
+import Link from "next/link";
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
+
+interface Tool {
+  id: string;
+  name: string;
+  owner: string;
+  image: string;
+}
+
+const tools = [
+  {
+    id: "1",
+    name: "Hammer",
+    owner: "Allan",
+    image: "/placeholder.png",
+  },
+  {
+    id: "2",
+    name: "Wheelbarrow",
+    owner: "Chris",
+    image: "/placeholder.png",
+  },
+];
+
+interface TextOptions {
+  size?: "smaller" | "larger";
+  weight?: "semibold" | "bold";
+}
+
+function Text({
+  size,
+  weight,
+  children,
+}: React.PropsWithChildren<TextOptions>) {
+  return (
+    <p className={cx(size && styles[size], weight && styles[weight])}>
+      {children}
+    </p>
+  );
+}
+
+function Card({ children }: React.PropsWithChildren) {
+  const rand = (Math.random() * 10) % 5;
+  return (
+    <div
+      className={cx(styles.card, styles.systemFont, styles.rounded)}
+      style={{ transform: `rotate(${rand} deg)` }}
+    >
+      {children}
+    </div>
+  );
+}
+
+function ToolList({ tools }: { tools: Tool[] }) {
+  return (
+    <ul
+      className={cx(
+        styles.noListStyle,
+        styles.m2,
+        styles.grid,
+        styles.g1,
+        styles.col3
+      )}
+    >
+      {tools.map((tool) => (
+        <li key={tool.id}>
+          <Card>
+            <Image
+              className={cx(styles.image, styles.rounded)}
+              src={tool.image}
+              alt='Placeholder'
+              width={600}
+              height={600}
+            />
+            <div className={cx(styles.pv1)}>
+              <Text weight='semibold' size='larger'>
+                <span className={cx(styles.faded)}>
+                  {tool.owner}&rsquo; {tool.name}
+                </span>
+              </Text>
+            </div>
+          </Card>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+function SiteName() {
+  return (
+    <Link
+      href='/'
+      className={cx(styles.inlineBlock, styles.larger, styles.hoverGlow)}
+    >
+      <h1
+        className={cx(
+          styles.systemFont,
+          styles.upperCase,
+          styles.o90,
+          styles.p2,
+          styles.larger
+        )}
+      >
+        <span
+          className={cx(
+            styles["c-braun-green"],
+            styles.block,
+            styles.o90,
+            styles.larger
+          )}
+        >
+          common
+        </span>
+        <span
+          className={cx(
+            styles["c-braun-yellow"],
+            styles.block,
+            styles.o90,
+            styles.larger
+          )}
+        >
+          place
+        </span>
+        <span className={cx(styles["c-braun-red"], styles.o70, styles.larger)}>
+          .
+        </span>
+        <span
+          className={cx(
+            styles["c-braun-orange"],
+            styles.lowerCase,
+            styles.o70,
+            styles.larger
+          )}
+        >
+          tools
+        </span>
+      </h1>
+    </Link>
+  );
+}
 
 export default function Home() {
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-        <div className={styles.thirteen}>
-          <Image src="/thirteen.svg" alt="13" width={40} height={31} priority />
-        </div>
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://beta.nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
+    <main className={cx(styles.page, styles.vh100)}>
+      <SiteName />
+      <ToolList tools={tools} />
     </main>
-  )
+  );
 }
