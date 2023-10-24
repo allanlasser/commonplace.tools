@@ -1,0 +1,36 @@
+.block {
+  display: block;
+}
+
+.inlineBlock {
+  display: inline-block;
+}
+
+.inline {
+  display: inline;
+}
+
+/* Flex */
+
+.flex {
+  display: flex;
+}
+
+.column {
+  flex-direction: column;
+}
+
+.justifyEnd {
+  justify-content: flex-end;
+}
+
+/* Grid */
+
+.grid {
+  display: grid;
+}
+
+.col3 {
+  grid-template-columns: repeat(auto-fill, minmax(calc(15*var(--unit)), 1fr));
+}
+

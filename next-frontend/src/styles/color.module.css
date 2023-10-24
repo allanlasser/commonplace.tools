@@ -1,0 +1,27 @@
+.c-braun-green {
+  color: var(--c-braun-green);
+}
+
+.c-braun-red {
+  color: var(--c-braun-red);
+}
+
+.c-braun-orange {
+  color: var(--c-braun-orange);
+}
+
+.c-braun-yellow {
+  color: var(--c-braun-yellow);
+}
+
+.o70 {
+  opacity: 70%;
+}
+
+.o90, .faded {
+  opacity: 90%;
+}
+
+.hoverGlow:hover, .hoverGlow:focus {
+  background: var(--c-white-3);
+}

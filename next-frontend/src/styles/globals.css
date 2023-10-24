@@ -1,5 +1,5 @@
 :root {
-  --c-white: hsl(32, 30%, 90%);
+  --c-white: hsl(32, 30%, 92%);
   --c-white-1: hsla(32, 60%, 95%, .1);
   --c-white-3: hsla(32, 60%, 95%, .3);
   --c-white-5: hsla(32, 60%, 95%, .5);
@@ -20,6 +20,12 @@
   :root {
     --text-color: var(--c-braun-white);
     --page-color: var(--c-black);
+  }
+}
+
+@media (max-width: 32rem) {
+  :root {
+    --unit: 0.5rem;
   }
 }
 

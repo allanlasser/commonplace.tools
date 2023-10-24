@@ -1,0 +1,13 @@
+
+
+.upperCase {
+  text-transform: uppercase;
+}
+
+.lowerCase {
+  text-transform: lowercase;
+}
+
+.noListStyle {
+  list-style-type: none;
+}

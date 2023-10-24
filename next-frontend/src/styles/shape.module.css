@@ -1,0 +1,40 @@
+.vh100 {
+  min-height: 100vh;
+}
+
+.p05 {
+  padding: calc(0.5 * var(--unit));
+}
+
+.p1 {
+  padding: var(--unit);
+}
+
+.pv1 {
+  padding-top: var(--unit);
+  padding-bottom: var(--unit);
+}
+
+.p2 {
+  padding: calc(2 * var(--unit));
+}
+
+.m05 {
+  margin: calc(0.5 * var(--unit));
+}
+
+.m1 {
+  margin: var(--unit);
+}
+
+.m2 {
+  margin: calc(2 * var(--unit));
+}
+
+.g1 {
+  gap: var(--unit);
+}
+
+.rounded {
+  border-radius: calc(.5 * var(--unit));
+}
