@@ -69,9 +69,6 @@ services:
       - "3000:3000"
     depends_on:
       - nginx-proxy
-    networks:
-      - default
-      - local
   
   ####
   # LOCAL DEVELOPMENT SERVICES
@@ -122,7 +119,6 @@ services:
     build:
       context: ./next-frontend
       dockerfile: ./Dockerfile
-    command: npm run start
     ports:
       - "3000:3000"
     expose:
