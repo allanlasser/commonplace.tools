@@ -1,14 +1,17 @@
 :root {
+  --font-size: 16px;
   --c-white: hsl(32, 30%, 92%);
-  --c-white-1: hsla(32, 60%, 95%, .1);
-  --c-white-3: hsla(32, 60%, 95%, .3);
-  --c-white-5: hsla(32, 60%, 95%, .5);
+  --c-white-1: hsla(32, 30%, 92%, .1);
+  --c-white-3: hsla(32, 30%, 92%, .3);
+  --c-white-5: hsla(32, 30%, 92%, .5);
   --c-black: hsl(32, 40%, 10%);
   --c-black-1: hsla(32, 40%, 10%, .1);
+  --c-black-3: hsla(32, 40%, 10%, .3);
+  --c-black-5: hsla(32, 40%, 10%, .5);
   --c-braun-yellow: #ED8008;
   --c-braun-orange: #ED3F1C;
   --c-braun-red: #BF1B1B;
-  --c-braun-green: #736B1E;
+  --c-braun-green: hsl(54, 70%, 30%);
   --c-braun-white: #D9D2C6;
   --text-color: var(--c-black);
   --page-color: var(--c-braun-white);
@@ -29,6 +32,12 @@
   }
 }
 
+@media (min-width: 64rem) {
+  :root {
+    --font-size: 14px;
+  }
+}
+
 * {
   box-sizing: border-box;
   padding: 0;
@@ -39,6 +48,7 @@ html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
+  font-size: var(--font-size);
 }
 
 body {

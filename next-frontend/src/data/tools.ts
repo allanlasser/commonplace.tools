@@ -18,4 +18,14 @@ export const tools: Tool[] = [
     owner: "Chris",
     image: "/images/wheelbarrow.png",
   },
+  {
+    id: "3",
+    name: "Shears",
+    owner: "Martha",
+    image: "/images/shears.png",
+  },
 ];
+
+export function getTool(id: string) {
+  return tools.find((tool) => tool.id === id);
+}

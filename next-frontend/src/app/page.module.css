@@ -4,14 +4,3 @@
   border-left: .125rem dotted var(--c-black-1);
   border-right: .125rem dotted var(--c-black-1);
 }
-
-.center {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.image {
-  max-width: 100%;
-  height: auto;
-}

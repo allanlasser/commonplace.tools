@@ -4,9 +4,10 @@ import font from "src/styles/font.module.css";
 import shape from "src/styles/shape.module.css";
 import layout from "src/styles/layout.module.css";
 
-export default function Card({ children }: React.PropsWithChildren) {
-  let pos = Math.random() >= 0.5 ? 1 : -1;
-  const rand = Math.random();
+export default function Card({
+  className,
+  children,
+}: React.PropsWithChildren<{ className?: string }>) {
   return (
     <div
       className={cx(
@@ -17,9 +18,9 @@ export default function Card({ children }: React.PropsWithChildren) {
         shape.p1,
         shape.g1,
         shape.rounded,
-        font.systemFont
+        font.systemFont,
+        className
       )}
-      style={{ transform: `rotate(${pos * rand}deg)` }}
     >
       {children}
     </div>
