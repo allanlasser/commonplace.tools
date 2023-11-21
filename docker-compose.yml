@@ -50,8 +50,8 @@ services:
     volumes:
       - .:/code
       - static:/static
-    ports:
-      - "8000:8000"
+    expose:
+      - "8000"
     environment:
       - POSTGRES_NAME=postgres
       - POSTGRES_USER=postgres
@@ -65,8 +65,8 @@ services:
     build:
       context: ./next-frontend
       dockerfile: ./Dockerfile
-    ports:
-      - "3000:3000"
+    expose:
+      - "3000"
     depends_on:
       - nginx-proxy
   
@@ -89,6 +89,8 @@ services:
     ports:
       - '80:80'
       - '443:443'
+    profile:
+      - local
     restart: always
 
   backend-local:
@@ -99,8 +101,6 @@ services:
     volumes:
       - .:/code
       - static:/static
-    ports:
-      - "8000:8000"
     expose:
       - "8000"
     networks:
@@ -113,14 +113,14 @@ services:
     depends_on:
       - db
       - nginx-proxy-local
+    profile:
+      - local
     restart: unless-stopped
 
   frontend-local:
     build:
       context: ./next-frontend
       dockerfile: ./Dockerfile
-    ports:
-      - "3000:3000"
     expose:
       - "3000"
     networks:
@@ -131,6 +131,8 @@ services:
       - nginx-proxy-local
     environment:
       - API_URL=http://backend-local:8000
+    profile:
+      - local
 
 networks:
   local:
