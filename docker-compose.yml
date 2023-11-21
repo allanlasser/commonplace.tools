@@ -50,8 +50,6 @@ services:
     volumes:
       - .:/code
       - static:/static
-    expose:
-      - "8000"
     environment:
       - POSTGRES_NAME=postgres
       - POSTGRES_USER=postgres
@@ -65,8 +63,6 @@ services:
     build:
       context: ./next-frontend
       dockerfile: ./Dockerfile
-    expose:
-      - "3000"
     depends_on:
       - nginx-proxy
   
@@ -127,10 +123,6 @@ services:
       - nginx-proxy-local
     environment:
       - API_URL=http://backend-local:8000
-
-networks:
-  local:
-    driver: bridge
 
 volumes:
   certs:
