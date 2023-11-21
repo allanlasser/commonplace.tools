@@ -97,9 +97,6 @@ services:
       - static:/static
     expose:
       - "8000"
-    networks:
-      - default
-      - local
     environment:
       - POSTGRES_NAME=postgres
       - POSTGRES_USER=postgres
@@ -115,9 +112,6 @@ services:
       dockerfile: ./Dockerfile
     expose:
       - "3000"
-    networks:
-      - default
-      - local
     depends_on:
       - backend-local
       - nginx-proxy-local
