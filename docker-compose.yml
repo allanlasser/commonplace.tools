@@ -97,6 +97,8 @@ services:
       - static:/static
     expose:
       - "8000"
+    ports:
+      - "8000:8000"
     environment:
       - POSTGRES_NAME=postgres
       - POSTGRES_USER=postgres
@@ -112,6 +114,8 @@ services:
       dockerfile: ./Dockerfile
     expose:
       - "3000"
+    ports:
+      - "3000:3000"
     depends_on:
       - backend-local
       - nginx-proxy-local
