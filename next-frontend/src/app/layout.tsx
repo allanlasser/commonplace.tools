@@ -1,5 +1,7 @@
 import { Inter } from "next/font/google";
 import "src/styles/globals.css";
+import Navigation from "src/components/Navigation";
+import { getToken } from "./auth/actions";
 
 const inter = Inter({ variable: "--font-inter", subsets: ["latin"] });
 
@@ -15,7 +17,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en' className={inter.variable}>
-      <body>{children}</body>
+      <body>
+        <Navigation />
+        {children}
+      </body>
     </html>
   );
 }

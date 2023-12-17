@@ -22,7 +22,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config('SECRET_KEY', default='django-insecure-eyiudt)c4efbabjqea@k^+od%p0a@rmw+v6%ys9+dn0tq%z_ga')
+SECRET_KEY = config(
+    'SECRET_KEY', default='django-insecure-eyiudt)c4efbabjqea@k^+od%p0a@rmw+v6%ys9+dn0tq%z_ga')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
@@ -44,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.gis',
     'rest_framework',
+    'rest_framework.authtoken',
     'rest_framework_gis',
     'lending_library',
     'django_filters',
@@ -157,7 +159,7 @@ STORAGES = {
     },
     'staticfiles': {
         # Leave whatever setting you already have here, e.g.:
-       # 'BACKEND': 'storages.backends.s3boto3.S3Boto3Storage',
+        # 'BACKEND': 'storages.backends.s3boto3.S3Boto3Storage',
         'BACKEND': 'django.contrib.staticfiles.storage.StaticFilesStorage',
     }
 }
@@ -167,7 +169,7 @@ AWS_S3_ACCESS_KEY_ID = config('AWS_S3_ACCESS_KEY_ID', default='')
 AWS_S3_SECRET_ACCESS_KEY = config('AWS_S3_SECRET_ACCESS_KEY', default='')
 AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME', default='')
 AWS_S3_REGION_NAME = config('AWS_S3_REGION_NAME', default='')
-#AWS_DEFAULT_ACL = 'public-read'
-#AWS_S3_CUSTOM_DOMAIN = 'media.commonplace.tools'
-#MEDIA_URL = 'http://media.commonplace.tools/'
+# AWS_DEFAULT_ACL = 'public-read'
+# AWS_S3_CUSTOM_DOMAIN = 'media.commonplace.tools'
+# MEDIA_URL = 'http://media.commonplace.tools/'
 AWS_QUERYSTRING_AUTH = False
