@@ -19,7 +19,8 @@ from django.urls import path
 from django.conf.urls import include
 from filebrowser.sites import site
 from rest_framework import routers
-from lending_library.views import LoanViewSet 
+from rest_framework.authtoken import views
+from lending_library.views import LoanViewSet
 from lending_library.views import LocationViewSet
 from lending_library.views import NetworkViewSet
 from lending_library.views import LendableTypeViewSet
@@ -28,7 +29,6 @@ from lending_library.views import LendableViewSet
 from lending_library.views import LoanViewSet
 from lending_library.views import UserViewSet
 from lending_library.views import GroupViewSet, PermissionViewSet, ContentTypeViewSet
-
 
 
 router = routers.DefaultRouter()
@@ -46,9 +46,12 @@ router.register(r'contenttype', ContentTypeViewSet)
 
 urlpatterns = [
     path('admin/filebrowser/', site.urls),
-    path('grappelli/', include('grappelli.urls')), # grappelli URLS
+    path('grappelli/', include('grappelli.urls')),  # grappelli URLS
     path('admin/', admin.site.urls),
 
     path('', include(router.urls)),
+
+    path('api-token-auth/', views.obtain_auth_token),
+
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]
