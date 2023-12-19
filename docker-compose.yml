@@ -65,6 +65,8 @@ services:
       dockerfile: ./Dockerfile
     depends_on:
       - nginx-proxy
+    environment:
+      - API_URL=http://backend:8000
   
   ####
   # LOCAL DEVELOPMENT SERVICES
