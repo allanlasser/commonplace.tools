@@ -29,7 +29,7 @@ SECRET_KEY = config(
 DEBUG = config('DEBUG', default=False, cast=bool)
 
 # SECURITY WARNING: don't allow localhost or local service hosts in production!
-ALLOWED_HOSTS = ['localhost', 'backend-local',
+ALLOWED_HOSTS = ['localhost', 'backend-local', 'backend',
                  'api.commonplace.tools', 'api-dev.commonplace.tools']
 
 # Application definition
